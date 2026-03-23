@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NutriGuide Hub helps you explore nutrients, estimate calories, calculate BMI, and create weight-based diet plans.">
+  <title>NutriGuide Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/hero-plate.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark">N</span>
+          <span>NutriGuide Hub</span>
+        </div>
+        <div class="nav-links">
+          <a href="#nutrients">Nutrients</a>
+          <a href="#bmi">BMI</a>
+          <a href="#calories">Calories</a>
+          <a href="#diet-plan">Diet Plan</a>
+        </div>
+        <div class="topbar-actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+            <span id="theme-toggle-text">Dark mode</span>
+          </button>
+          <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+      <aside id="side-menu" class="side-menu" aria-hidden="true">
+        <div class="side-menu-header">
+          <h3>Quick Menu</h3>
+          <button id="menu-close" class="theme-toggle" type="button" aria-label="Close navigation menu">Close</button>
+        </div>
+        <div class="side-menu-links">
+          <a href="#nutrients" class="menu-link">Nutrition Library</a>
+          <a href="#calories" class="menu-link">Calories Calculator</a>
+          <a href="#diet-plan" class="menu-link">Diet Plan</a>
+          <a href="#about" class="menu-link">About Us</a>
+        </div>
+      </aside>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Food knowledge made useful</p>
+          <h1>Track nutrition, plan your meals, and make body goals feel easier to follow.</h1>
+          <p class="hero-text">
+            Explore vitamins, minerals, amino acids, fibre, protein, healthy fats, unhealthy fats,
+            BMI status, ingredient calories, and a weight-based diet planner with a fast interactive dashboard.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#nutrients">Explore Nutrients</a>
+            <a class="button secondary" href="#diet-plan">Open Diet Planner</a>
+          </div>
+          <div class="hero-highlight">
+            <span class="hero-highlight-badge">New planner flow</span>
+            <p>Use body weight, goal, meals, and activity to get cleaner calorie targets, stronger protein guidance, and a more useful daily meal outline.</p>
+          </div>
+          <div class="stat-row">
+            <article>
+              <strong>7</strong>
+              <span>nutrition groups</span>
+            </article>
+            <article>
+              <strong>BMI</strong>
+              <span>weight range check</span>
+            </article>
+            <article>
+              <strong>Smart</strong>
+              <span>weight-based meal targets</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <img src="assets/hero-plate.svg" alt="Illustrated healthy food plate" width="720" height="620" fetchpriority="high" decoding="async">
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="info-strip">
+        <article>
+          <h2>Daily awareness</h2>
+          <p>Deficiency symptoms and excess effects are shown side by side for quick comparison.</p>
+        </article>
+        <article>
+          <h2>Smart tools</h2>
+          <p>BMI and calorie tools help turn nutrition facts into practical decisions.</p>
+        </article>
+        <article>
+          <h2>Safer visuals</h2>
+          <p>All included illustrations are original local SVG assets created for this website.</p>
+        </article>
+      </section>
+
+      <section id="nutrients" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Nutrition reference</p>
+          <h2>Essential nutrients and what they do</h2>
+          <p>Each card covers uses, functions, common food sources, too much, and too little.</p>
+        </div>
+        <div class="filter-bar">
+          <label>
+            <span>Filter nutrient details</span>
+            <select id="nutrient-filter">
+              <option value="all">Show all</option>
+              <option value="vitamins">Vitamins only</option>
+              <option value="minerals">Minerals only</option>
+              <option value="amino">Amino acids only</option>
+              <option value="hormones">Hormones only</option>
+            </select>
+          </label>
+        </div>
+        <div id="nutrient-grid" class="nutrient-grid"></div>
+      </section>
+
+      <section id="vitamin-section" class="section filter-section" data-filter-group="vitamins">
+        <div class="section-heading">
+          <p class="eyebrow">Vitamin library</p>
+          <h2>Individual vitamins</h2>
+          <p>Separate reference cards for the major vitamins your body uses regularly.</p>
+        </div>
+        <div id="vitamin-grid" class="detail-grid"></div>
+      </section>
+
+      <section id="mineral-section" class="section filter-section" data-filter-group="minerals">
+        <div class="section-heading">
+          <p class="eyebrow">Mineral library</p>
+          <h2>Individual minerals</h2>
+          <p>Key minerals for bones, blood, nerves, fluid balance, and enzyme support.</p>
+        </div>
+        <div id="mineral-grid" class="detail-grid"></div>
+      </section>
+
+      <section id="amino-section" class="section filter-section" data-filter-group="amino">
+        <div class="section-heading">
+          <p class="eyebrow">Amino acid library</p>
+          <h2>Essential amino acids</h2>
+          <p>These amino acids must come from food because the body cannot make enough of them.</p>
+        </div>
+        <div id="amino-grid" class="detail-grid"></div>
+      </section>
+
+      <section id="hormone-section" class="section filter-section" data-filter-group="hormones">
+        <div class="section-heading">
+          <p class="eyebrow">Hormone library</p>
+          <h2>Important body hormones</h2>
+          <p>Understand how key hormones work, what happens when levels are high or low, and what food or lifestyle factors support balance.</p>
+        </div>
+        <div id="hormone-grid" class="detail-grid"></div>
+      </section>
+
+      <section id="bmi" class="section tools-section">
+        <div class="section-heading">
+          <p class="eyebrow">Body check</p>
+          <h2>BMI calculator</h2>
+          <p>Find out whether weight falls in an underweight, healthy, overweight, or obesity range.</p>
+        </div>
+        <div class="tool-card bmi-layout">
+          <form id="bmi-form" class="form-grid">
+            <label>
+              <span>Height unit</span>
+              <select id="height-unit">
+                <option value="cm">Centimeters (cm)</option>
+                <option value="ft">Feet and inches</option>
+              </select>
+            </label>
+            <div id="height-cm-group">
+              <label>
+                <span>Height (cm)</span>
+                <input type="number" id="height" min="50" max="260" step="0.1" placeholder="170">
+              </label>
+            </div>
+            <div id="height-ft-group" class="height-split hidden">
+              <label>
+                <span>Feet</span>
+                <input type="number" id="height-feet" min="1" max="8" step="1" placeholder="5">
+              </label>
+              <label>
+                <span>Inches</span>
+                <input type="number" id="height-inches" min="0" max="11" step="1" placeholder="7">
+              </label>
+            </div>
+            <label>
+              <span>Weight (kg)</span>
+              <input type="number" id="weight" min="10" max="400" step="0.1" placeholder="65">
+            </label>
+            <button type="submit" class="button primary">Calculate BMI</button>
+          </form>
+          <div class="result-panel" id="bmi-result">
+            <h3>Your result</h3>
+            <p>Enter height and weight to see your BMI category.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="calories" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Energy and macro tools</p>
+          <h2>Calories, protein, and fibre charts</h2>
+          <p>Add foods to a running list, estimate calories, protein, fibre, and compare common foods quickly.</p>
+        </div>
+
+        <div class="calorie-layout">
+          <article class="tool-card">
+            <h3>Quick calorie chart</h3>
+            <div id="calorie-chart" class="chart-grid"></div>
+          </article>
+
+          <article class="tool-card">
+            <h3>Quick protein chart</h3>
+            <div id="protein-chart" class="chart-grid"></div>
+          </article>
+        </div>
+
+        <div class="calorie-layout chart-row-second">
+          <article class="tool-card">
+            <h3>Quick fibre chart</h3>
+            <div id="fibre-chart" class="chart-grid"></div>
+          </article>
+
+          <article class="tool-card">
+            <h3>Ingredient nutrition lookup</h3>
+            <p class="muted">
+              Example: type <strong>egg</strong> and quantity <strong>2</strong>. The app tries an online search first and uses local nutrition values if needed.
+            </p>
+            <form id="ingredient-form" class="ingredient-form">
+              <label>
+                <span>Ingredient</span>
+                <input type="text" id="ingredient-name" placeholder="egg">
+              </label>
+              <label>
+                <span>Quantity</span>
+                <input type="number" id="ingredient-quantity" min="0.1" step="0.1" placeholder="2">
+              </label>
+              <label>
+                <span>Unit</span>
+                <select id="ingredient-unit">
+                  <option value="piece">piece</option>
+                  <option value="g">grams</option>
+                  <option value="ml">ml</option>
+                  <option value="cup">cup</option>
+                  <option value="tbsp">tbsp</option>
+                </select>
+              </label>
+              <button type="submit" class="button primary">Search and Add</button>
+            </form>
+            <div id="lookup-status" class="lookup-status">No ingredients added yet.</div>
+          </article>
+        </div>
+
+        <article class="tool-card added-items-card">
+          <div class="added-items-header">
+            <h3>Added items</h3>
+            <button id="clear-items" class="button secondary button-small" type="button">Clear All</button>
+          </div>
+          <div id="added-items" class="added-items-list"></div>
+          <div class="total-bar total-grid">
+            <div>
+              <span>Total estimated calories</span>
+              <strong id="total-calories">0 kcal</strong>
+            </div>
+            <div>
+              <span>Total estimated protein</span>
+              <strong id="total-protein">0 g</strong>
+            </div>
+            <div>
+              <span>Total estimated fibre</span>
+              <strong id="total-fibre">0 g</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="diet-plan" class="section planner-section">
+        <div class="section-heading planner-heading">
+          <p class="eyebrow">Personal planning</p>
+          <h2>Weight-based diet planner</h2>
+          <p>Tell the planner your body weight, goal, meals, and food style to get a more practical daily target for calories, protein, hydration, and meal ideas.</p>
+        </div>
+        <div class="planner-band">
+          <article class="planner-story-card">
+            <p class="planner-kicker">Built for fast decisions</p>
+            <h3>Make the goal match the daily food plan</h3>
+            <p>
+              The planner now uses body weight as a starting point. Muscle gain pushes protein higher,
+              weight loss trims calories, and weight gain adds a steady surplus for better progress.
+            </p>
+            <div class="planner-pill-grid">
+              <div class="planner-pill">Muscle gain: 2.0 g protein per kg</div>
+              <div class="planner-pill">Weight loss: lower calories with steady protein</div>
+              <div class="planner-pill">Weight gain: higher calories with easy add-ons</div>
+            </div>
+          </article>
+
+          <div class="tool-card planner-tool-shell">
+            <form id="diet-form" class="form-grid planner-form">
+              <div class="planner-block-heading">
+                <span>Step 1</span>
+                <h3>Set your starting point</h3>
+                <p>Choose your body weight, activity, style, and goal. The planner will turn that into a daily meal guide.</p>
+              </div>
+              <label>
+                <span>Weight (kg)</span>
+                <input type="number" id="diet-weight" min="25" max="350" step="0.1" placeholder="68">
+              </label>
+              <label>
+                <span>Activity level</span>
+                <select id="diet-activity">
+                  <option value="moderate">Moderately active</option>
+                  <option value="light">Lightly active</option>
+                  <option value="sedentary">Mostly sitting</option>
+                  <option value="active">Very active</option>
+                </select>
+              </label>
+              <label>
+                <span>Diet style</span>
+                <select id="diet-style">
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="non-vegetarian">Non-vegetarian</option>
+                </select>
+              </label>
+              <label>
+                <span>Goal</span>
+                <select id="diet-goal">
+                  <option value="weight-loss">Lose weight</option>
+                  <option value="muscle-gain">Gain muscle</option>
+                  <option value="weight-gain">Gain weight</option>
+                </select>
+              </label>
+              <label>
+                <span>Meals per day</span>
+                <select id="diet-meals">
+                  <option value="3">3 meals</option>
+                  <option value="4">4 meals</option>
+                  <option value="5">5 meals</option>
+                </select>
+              </label>
+              <p class="planner-form-note">These are rough educational starting targets, not medical prescriptions.</p>
+              <button type="submit" class="button primary">Generate Diet Plan</button>
+            </form>
+            <div id="diet-result" class="result-panel planner-result-panel">
+              <div class="planner-empty-state">
+                <span class="planner-empty-badge">Step 2</span>
+                <h3>Your diet plan</h3>
+                <p>Enter your weight, activity, and goal to see weight-based calories, protein, hydration, and meal portions for each item.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section note-section">
+        <div class="note-card">
+          <img src="assets/nutrition-lab.svg" alt="Illustrated nutrition dashboard" width="560" height="420" loading="lazy" decoding="async">
+          <div>
+            <h2>Important note</h2>
+            <p>
+              This website is for education and rough calorie estimation. Nutrition needs differ by age,
+              sex, medical history, activity level, and health conditions. For medical advice, use a qualified doctor or dietitian.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">About us</p>
+          <h2>Why this website was made</h2>
+          <p>This website is made for people who want simple nutrition guidance, clear health education, and easy food calculators in one place.</p>
+        </div>
+        <div class="info-strip about-grid">
+          <article>
+            <h2>Made for daily use</h2>
+            <p>Use it to check nutrients, compare foods, estimate calories, protein, fibre, and build a rough daily eating plan without jumping between websites.</p>
+          </article>
+          <article>
+            <h2>Beginner friendly</h2>
+            <p>The content is written in simple English so students, gym beginners, families, and health-conscious users can understand it more easily.</p>
+          </article>
+          <article>
+            <h2>Easy navigation</h2>
+            <p>The quick menu gives direct access to Nutrition Library, Calories Calculator, Diet Plan, and About Us for faster browsing.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="back-to-top" class="back-to-top" type="button" aria-label="Go to top of page">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
